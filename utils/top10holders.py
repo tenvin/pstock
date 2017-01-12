@@ -3,6 +3,9 @@
 
 from bs4 import BeautifulSoup
 import requests
+from sqlalchemy import select
+
+from utils.db import investor, conn
 
 s = requests.Session()
 def get_items():
@@ -25,7 +28,12 @@ def get_items():
             print td.getText(),
         print
 
+def get_code():
+    s = select([investor.c.code])
+    r = conn.execute(s)
+    ru = r.fetchall()
+    print ru[0]
 
 if __name__ == '__main__':
-    get_items()
+    get_code()
 
