@@ -18,9 +18,9 @@ class Investor(BaseModel):
     code = Column(String(30))
     quarter = Column(String(20))
     name = Column(String(120))
-    ratio = Column(Float)
-    amount = Column(Float)
-    status = Column(Integer)
+    ratio = Column(String(20))
+    amount = Column(String(20))
+    status = Column(String(20))
 
     def __init__(self, list):
         self.code,self.quarter,self.name,self.ratio,self.amount,self.status = list

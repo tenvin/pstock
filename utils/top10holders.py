@@ -27,9 +27,10 @@ def get_items():
 def save(list):
     investor = Investor(list)
     session.add(investor)
+    session.commit()
 
 
-def deal(soup):
+def deal(soup,code,quarter):
     list = []
     tables = soup.findAll('table')
     tab = tables[0]
@@ -41,14 +42,14 @@ def deal(soup):
             list.append(td.getText())
             #print td.getText(),
         #print
-    print list
+
     #slice list
     for i in range(len(list)/4):
-        if i==0:
-            print list[0:3]
-            continue
-        print list[3*i+1:3*(i+1)]
-    #save(list)
+        l = list[4*i:4*i+4]
+        l.insert(0,quarter)
+        l.insert(0,code)
+        save(l)
+
 
 
 def get_code():
@@ -65,10 +66,10 @@ def get_code():
 if __name__ == '__main__':
     code = '000001'
     code2 = '300581'
-    date = '2016-09-30'
-    URL_Base = 'http://quotes.money.163.com/service/gdfx.html?ltdate='+ date +'&symbol=' + code
+    quarter = '2016-09-30'
+    URL_Base = 'http://quotes.money.163.com/service/gdfx.html?ltdate='+ quarter +'&symbol=' + code
     r = s.get(URL_Base)
     soup = BeautifulSoup(r.content,"lxml")
-    deal(soup)
+    deal(soup,code,quarter)
 
 

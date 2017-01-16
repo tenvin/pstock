@@ -2,7 +2,9 @@
 from sqlalchemy import create_engine, \
     Table, Column, Integer, String, Float, MetaData, ForeignKey
 
-engine = create_engine('mysql://root:root@localhost/pstock?charset=utf8', encoding="utf-8")
+from utils.config import DB_CONNECT_STRING
+
+engine = create_engine(DB_CONNECT_STRING, encoding="utf-8")
 
 # 获取元数据
 metadata = MetaData()
