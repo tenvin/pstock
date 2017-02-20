@@ -14,6 +14,9 @@ def before_trading_start(context):
     # 得到所有股票昨日收盘价, 每天只需要取一次, 所以放在 before_trading_start 中
     g.last_df = history(3,'1d','volume')
 
+def after_trading_end(context):
+    log.info(str(context.current_dt))
+
 # 每个单位时间(如果按天回测,则每天调用一次,如果按分钟,则每分钟调用一次)调用一次
 def handle_data(context, data):
     for security in g.stocks:

@@ -1,0 +1,10 @@
+
+
+macd
+===================================
+df = get_price('000001.XSHG', count = 130, end_date='2017-02-20', frequency='daily', fields=['close'])
+close = df['close']
+close = np.array(close, dtype='f8')
+
+wDif, wDea, wMacd =  MACD_CN(close, 12, 26, 9)
+print wDif, wDea, wMacd
